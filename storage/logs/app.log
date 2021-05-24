@@ -20,3 +20,18 @@
 2021/05/24 16:35:57 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621845357647138000}
 2021/05/24 16:37:40 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621845460976042000}
 2021/05/24 16:38:20 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621845500318948000}
+2021/05/24 17:14:39 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621847679501704000}
+2021/05/24 17:15:46 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621847746454458000}
+2021/05/24 17:20:43 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848043000245000}
+2021/05/24 17:21:19 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848079626081000}
+2021/05/24 17:22:09 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848129185089000}
+2021/05/24 17:22:43 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848163807869000}
+2021/05/24 17:24:24 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848264359018000}
+2021/05/24 17:29:50 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848590915088000}
+2021/05/24 17:30:07 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848607896550000}
+2021/05/24 17:36:27 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621848987146357000}
+2021/05/24 17:36:30 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"access log: method: GET, status_code: 400, begin_time: 1621848990, end_time: 1621848990","request":"","response":"{\"code\":100000001,\"msg\":\"入参错误\"}","time":1621848990351868000}
+2021/05/24 17:38:47 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"access log: method: GET, status_code: 400, begin_time: 1621849127, end_time: 1621849127","request":"","response":"{\"code\":100000001,\"msg\":\"入参错误\"}","time":1621849127165588000}
+2021/05/24 17:47:46 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621849666403822000}
+2021/05/24 17:48:12 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621849692014466000}
+2021/05/24 17:48:12 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"painc","message":"项目启动失败%!(EXTRA *net.OpError=listen tcp :8080: bind: address already in use)","time":1621849692016911000}

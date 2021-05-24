@@ -175,11 +175,11 @@ func (l *Logger) Warnf(format string,v ...interface{})  {
 }
 
 
-func (l *Logger) Painc(v ...interface{})  {
+func (l *Logger) Panic(v ...interface{})  {
 	l.Output(LevelPanic,fmt.Sprint(v...))
 }
 
-func (l *Logger) Paincf(format string,v ...interface{})  {
+func (l *Logger) Panicf(format string,v ...interface{})  {
 	l.Output(LevelPanic,fmt.Sprintf(format,v...))
 }
 

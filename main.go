@@ -36,7 +36,7 @@ func main()  {
 	global.Logger.Infof("监听端口%s",global.ServerSetting.HttpPort)
 	err := s.ListenAndServe()
 	if err != nil {
-		global.Logger.Paincf("项目启动失败",err)
+		global.Logger.Panicf("项目启动失败",err)
 	}
 }
 
@@ -60,6 +60,17 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	err = setting.ReadSection("JWT", &global.JWTSetting)
+	if err != nil {
+		return err
+	}
+
+	err = setting.ReadSection("Email", &global.EmailSetting)
+	if err != nil {
+		return err
+	}
+
+	global.JWTSetting.Expire *= time.Second
 	
 	global.ServerSetting.ReadTimeout *= time.Second
 	global.ServerSetting.WriteTimeout *= time.Second

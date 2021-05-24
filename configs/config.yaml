@@ -27,3 +27,16 @@ Database:
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30
+JWT:
+  Secret: joy-blog
+  Issuer: blog-service
+  Expire: 7200
+Email:
+  Host: smtp.163.com
+  Port: 465
+  UserName: 13456327316@163.com
+  Password: JAVEQZJCRMZIVLBH
+  IsSSL: true
+  From: 13456327316@163.com
+  To:
+    - 1003818507@qq.com

@@ -10,8 +10,8 @@ var (
 	ServerSetting   *setting.ServerSettings
 	AppSetting      *setting.AppSettings
 	DatabaseSetting *setting.DatabaseSettings
-	DBEngine *gorm.DB
-	Logger *logger.Logger
-
+	DBEngine        *gorm.DB
+	Logger          *logger.Logger
+	JWTSetting      *setting.JWTSettings
+	EmailSetting    *setting.EmailSettingS
 )
-
