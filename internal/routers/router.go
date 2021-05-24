@@ -10,6 +10,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"net/http"
+	"time"
 )
 
 func NewRouter() *gin.Engine  {
@@ -19,6 +20,7 @@ func NewRouter() *gin.Engine  {
 	r.Use(middleware.AccessLog())
 	r.Use(middleware.Recovery())
 	r.Use(middleware.Translations())
+	r.Use(middleware.ContextTimeout(60 * time.Second))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/upload/file", Upload{}.UploadFile)
