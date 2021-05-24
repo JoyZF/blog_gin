@@ -2,11 +2,13 @@ package routers
 
 import (
 	_ "github.com/JoyZF/blog_gin/docs"
+	"github.com/JoyZF/blog_gin/global"
 	"github.com/JoyZF/blog_gin/internal/middleware"
 	v1 "github.com/JoyZF/blog_gin/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"net/http"
 )
 
 func NewRouter() *gin.Engine  {
@@ -15,6 +17,10 @@ func NewRouter() *gin.Engine  {
 	r.Use(gin.Recovery())
 	r.Use(middleware.Translations())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	r.POST("/upload/file", Upload{}.UploadFile)
+
+	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
 
 	tag := v1.Tag{}
 	article := v1.Article{}

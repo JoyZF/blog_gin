@@ -21,9 +21,6 @@ func NewResponse(ctx *gin.Context) *Response  {
 }
 
 func (r *Response) ToResponse(data interface{})  {
-	if data != nil {
-		data = gin.H{}
-	}
 	r.Ctx.JSON(http.StatusOK,data)
 }
 
