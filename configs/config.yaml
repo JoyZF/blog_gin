@@ -13,10 +13,10 @@ Database:
   DBType: mysql
   Username: root
   Password: Hh123456
-  Host: rm-bp16f67564q9as6m61o.mysql.rds.aliyuncs.com
+  Host: rm-bp16f67564q9as6m61o.mysql.rds.aliyuncs.com:3306
   DBName: blog
   TablePrefix: blog
-  Charset: utf-8
+  Charset: utf8
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30

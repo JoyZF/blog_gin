@@ -1,0 +1,13 @@
+2021/05/23 17:00:21 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621760421878121000}
+2021/05/24 13:58:22 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621835902264161000}
+2021/05/24 14:17:48 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621837068534931000}
+2021/05/24 14:21:39 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621837299124113000}
+2021/05/24 14:26:15 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621837575047357000}
+2021/05/24 14:29:06 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621837746938838000}
+2021/05/24 14:29:48 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621837788623880000}
+2021/05/24 14:55:49 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621839349771971000}
+2021/05/24 14:57:28 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621839448590240000}
+2021/05/24 14:58:22 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621839502982100000}
+2021/05/24 15:27:20 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621841240860671000}
+2021/05/24 15:33:15 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621841595664498000}
+2021/05/24 15:34:21 {"callers":["/Users/joy/workspace/gopath/src/blog_gin/main.go: 24 main.init.0"],"level":"info","message":"监听端口8080","time":1621841661354369000}
