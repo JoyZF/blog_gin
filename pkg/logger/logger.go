@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"io"
 	"log"
 	"runtime"
@@ -48,7 +49,7 @@ func (l Level) String() string {
 	return ""
 }
 
-func NewLogger(w io.Writer,prefix string,flag int) *Logger {
+func NewLogger(w io.Writer, prefix string, flag int) *Logger {
 	l := log.New(w, prefix, flag)
 	return &Logger{
 		newLogger: l,
@@ -66,19 +67,19 @@ func (l *Logger) WithFields(f Fields) *Logger {
 		ll.fields = make(Fields)
 	}
 
-	for k,v := range f {
+	for k, v := range f {
 		ll.fields[k] = v
 	}
 	return ll
 }
 
-func (l *Logger) WithContext(ctx context.Context) *Logger  {
+func (l *Logger) WithContext(ctx context.Context) *Logger {
 	ll := l.clone()
 	ll.ctx = ctx
 	return ll
 }
 
-func (l *Logger) WithCaller(skip int) *Logger  {
+func (l *Logger) WithCaller(skip int) *Logger {
 	ll := l.clone()
 	pc, file, line, ok := runtime.Caller(skip)
 	if ok {
@@ -88,7 +89,7 @@ func (l *Logger) WithCaller(skip int) *Logger  {
 	return ll
 }
 
-func (l *Logger) WithCallersFrames() *Logger  {
+func (l *Logger) WithCallersFrames() *Logger {
 	maxCallerDepth := 25
 	minCallerDepth := 1
 	callers := []string{}
@@ -96,9 +97,9 @@ func (l *Logger) WithCallersFrames() *Logger  {
 	depth := runtime.Callers(minCallerDepth, pcs)
 	frames := runtime.CallersFrames(pcs[:depth])
 
-	for frame, more := frames.Next();more;frame, more = frames.Next()  {
+	for frame, more := frames.Next(); more; frame, more = frames.Next() {
 		s := fmt.Sprintf("%s:%d %s", frame.File, frame.Line, frame.Function)
-		callers = append(callers,s)
+		callers = append(callers, s)
 		if !more {
 			break
 		}
@@ -108,15 +109,15 @@ func (l *Logger) WithCallersFrames() *Logger  {
 	return ll
 }
 
-func (l *Logger) JSONFormat(level Level,message string)  map[string]interface{}  {
+func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} {
 	data := make(Fields, len(l.fields)+4)
 	data["level"] = level.String()
 	data["time"] = time.Now().Local().UnixNano()
 	data["message"] = message
 	data["callers"] = l.callers
 	if len(l.fields) > 0 {
-		for k,v := range l.fields {
-			if _,ok := data[k];!ok {
+		for k, v := range l.fields {
+			if _, ok := data[k]; !ok {
 				data[k] = v
 			}
 		}
@@ -124,7 +125,18 @@ func (l *Logger) JSONFormat(level Level,message string)  map[string]interface{} 
 	return data
 }
 
-func (l *Logger) Output(level Level,message string)  {
+func (l *Logger) WithTrace() *Logger {
+	ginCtx, ok := l.ctx.(*gin.Context)
+	if ok {
+		return l.WithFields(Fields{
+			"trace_id": ginCtx.MustGet("X-trace-ID"),
+			"span_id": ginCtx.MustGet("X-Span-ID"),
+		})
+	}
+	return l
+}
+
+func (l *Logger) Output(level Level, message string) {
 	body, _ := json.Marshal(l.JSONFormat(level, message))
 	content := string(body)
 	switch level {
@@ -141,53 +153,51 @@ func (l *Logger) Output(level Level,message string)  {
 	}
 }
 
-func (l *Logger) Info(v ...interface{})  {
-	l.Output(LevelInfo,fmt.Sprint(v...))
+
+func (l *Logger) Info(v ...interface{}) {
+	l.Output(LevelInfo, fmt.Sprint(v...))
 }
 
-func (l *Logger) Infof(format string,v ...interface{}) {
-	l.Output(LevelInfo,fmt.Sprintf(format,v...))
+func (l *Logger) Infof(format string, v ...interface{}) {
+	l.Output(LevelInfo, fmt.Sprintf(format, v...))
 }
 
-func (l *Logger) Fatal(v ...interface{})  {
-	l.Output(LevelFatal,fmt.Sprint(v...))
+func (l *Logger) Fatal(v ...interface{}) {
+	l.Output(LevelFatal, fmt.Sprint(v...))
 }
 
-func (l *Logger) Fatalf(format string,v ...interface{})  {
-	l.Output(LevelFatal,fmt.Sprintf(format,v...))
+func (l *Logger) Fatalf(format string, v ...interface{}) {
+	l.Output(LevelFatal, fmt.Sprintf(format, v...))
 }
 
-func (l *Logger) Debug(v ...interface{})  {
-	l.Output(LevelDebug,fmt.Sprint(v...))
+func (l *Logger) Debug(v ...interface{}) {
+	l.Output(LevelDebug, fmt.Sprint(v...))
 }
 
-func (l *Logger) Debugf(format string,v ...interface{})  {
-	l.Output(LevelDebug,fmt.Sprintf(format,v...))
+func (l *Logger) Debugf(format string, v ...interface{}) {
+	l.Output(LevelDebug, fmt.Sprintf(format, v...))
 }
 
-
-func (l *Logger) Warn(v ...interface{})  {
-	l.Output(Levelwarn,fmt.Sprint(v...))
+func (l *Logger) Warn(v ...interface{}) {
+	l.Output(Levelwarn, fmt.Sprint(v...))
 }
 
-func (l *Logger) Warnf(format string,v ...interface{})  {
-	l.Output(Levelwarn,fmt.Sprintf(format,v...))
+func (l *Logger) Warnf(format string, v ...interface{}) {
+	l.Output(Levelwarn, fmt.Sprintf(format, v...))
 }
 
-
-func (l *Logger) Panic(v ...interface{})  {
-	l.Output(LevelPanic,fmt.Sprint(v...))
+func (l *Logger) Panic(v ...interface{}) {
+	l.Output(LevelPanic, fmt.Sprint(v...))
 }
 
-func (l *Logger) Panicf(format string,v ...interface{})  {
-	l.Output(LevelPanic,fmt.Sprintf(format,v...))
+func (l *Logger) Panicf(format string, v ...interface{}) {
+	l.Output(LevelPanic, fmt.Sprintf(format, v...))
 }
 
-
-func (l *Logger) Error(v ...interface{})  {
-	l.Output(LevelError,fmt.Sprint(v...))
+func (l *Logger) Error(v ...interface{}) {
+	l.Output(LevelError, fmt.Sprint(v...))
 }
 
-func (l *Logger) Errorf(format string,v ...interface{})  {
-	l.Output(LevelError,fmt.Sprintf(format,v...))
+func (l *Logger) Errorf(format string, v ...interface{}) {
+	l.Output(LevelError, fmt.Sprintf(format, v...))
 }

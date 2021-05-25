@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/JoyZF/blog_gin/global"
 	"github.com/JoyZF/blog_gin/pkg/setting"
+	otgorm "github.com/eddycjy/opentracing-gorm"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"time"
@@ -46,6 +47,8 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettings) (*gorm.DB, error) {
 
 	db.DB().SetMaxIdleConns(databaseSetting.MaxIdleConns)
 	db.DB().SetMaxOpenConns(databaseSetting.MaxOpenConns)
+
+	otgorm.AddGormCallbacks(db)
 	return db, nil
 }
 
@@ -110,3 +113,4 @@ func addExtraSpaceIfExist(str string) string {
 	}
 	return ""
 }
+
