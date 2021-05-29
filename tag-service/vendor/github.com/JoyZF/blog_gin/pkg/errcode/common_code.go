@@ -7,5 +7,4 @@ var (
 	NotFound      = NewError(100000002, "未找到")
 	UnAuth        = NewError(100000003, "鉴权失败")
 	TooManyReq    = NewError(100000004, "请求过多")
-	TogRPCError   = NewError(10000005,"RPC err")
 )
