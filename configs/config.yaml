@@ -18,9 +18,9 @@ App:
     - .png
 Database:
   DBType: mysql
-  Username: xxxx
-  Password: xxxxx
-  Host: rxxxxxx:3306
+  Username: root
+  Password: Hh123456
+  Host: rm-bp16f67564q9as6m61o.mysql.rds.aliyuncs.com:3306
   DBName: blog
   TablePrefix: blog
   Charset: utf8

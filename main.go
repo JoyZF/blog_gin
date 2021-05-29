@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"github.com/JoyZF/blog_gin/global"
 	"github.com/JoyZF/blog_gin/internal/model"
@@ -11,7 +12,10 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -49,11 +53,31 @@ func main() {
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
-	global.Logger.Infof( "监听端口%s", global.ServerSetting.HttpPort)
-	err := s.ListenAndServe()
-	if err != nil {
-		global.Logger.Panicf( "项目启动失败", err)
+	go func() {
+		err := s.ListenAndServe()
+		if err != nil && err != http.ErrServerClosed {
+			log.Fatalf("s.ListenAndServe err : %v",err)
+		}
+	}()
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit,syscall.SIGINT,syscall.SIGTERM)
+	o := <-quit
+	log.Printf("shuting down server...%v",o.String())
+
+	//最大时间控制，用于通知该服务端他有5秒的时间来处理原来的请求
+	ctx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancelFunc()
+
+	if err := s.Shutdown(ctx);err != nil {
+		log.Fatalf("server forced to shutdown:",err)
 	}
+	log.Println("Server exiting")
+	//global.Logger.Infof( "监听端口%s", global.ServerSetting.HttpPort)
+	//err := s.ListenAndServe()
+	//if err != nil {
+	//	global.Logger.Panicf( "项目启动失败", err)
+	//}
 }
 
 func setupSetting() error {
