@@ -47,3 +47,8 @@ func (d *Dao) DeleteTag(id uint32) error {
 	tag := model.Tag{Model: &model.Model{ID: id}}
 	return tag.Delete(d.engine)
 }
+
+func (d *Dao) FindOne(id uint32) (*model.Tag, error) {
+	tag := model.Tag{Model: &model.Model{ID: id}}
+	return tag.FindOne(d.engine)
+}

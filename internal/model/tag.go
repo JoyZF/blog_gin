@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/JoyZF/blog_gin/pkg/app"
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 )
 
 type Tag struct {
@@ -64,4 +65,16 @@ func (t Tag) Update(db *gorm.DB,values map[string]interface{}) error {
 
 func (t Tag) Delete(db *gorm.DB) error {
 	return db.Where("id = ? AND is_del = ?", t.Model.ID, 0).Delete(&t).Error
+}
+
+func (t Tag) FindOne(db *gorm.DB) (*Tag,error) {
+	var tag *Tag
+	var err error
+	if t.ID != 0 {
+		db = db.Where("id = ?", t.ID)
+	}
+	if err = db.Where("is_del = ?", 0).Find(&tag).Error; err != nil {
+		return nil, errors.Wrapf(err,"model tag: find err")
+	}
+	return tag, nil
 }

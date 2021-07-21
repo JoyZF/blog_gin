@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	APP_KEY = "joy"
-	APP_SECRET = "123456778"
+	APP_KEY = "eddycjy"
+	APP_SECRET = "go-programming-tour-book"
 )
 
 

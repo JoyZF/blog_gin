@@ -21,6 +21,8 @@ github.com/eddycjy/opentracing-gorm
 # github.com/fsnotify/fsnotify v1.4.9
 ## explicit
 github.com/fsnotify/fsnotify
+# github.com/fullstorydev/grpcurl v1.8.1
+## explicit
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.7.2
@@ -119,7 +121,7 @@ github.com/opentracing/opentracing-go/log
 # github.com/pelletier/go-toml v1.9.1
 ## explicit
 github.com/pelletier/go-toml
-# github.com/pkg/errors v0.8.1
+# github.com/pkg/errors v0.9.1
 github.com/pkg/errors
 # github.com/russross/blackfriday/v2 v2.1.0
 ## explicit

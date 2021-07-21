@@ -33,6 +33,11 @@ type DeleteTagRequest struct {
 	ID uint32 `form:"id" binding:"required,gte=1"`
 }
 
+
+type FindTagRequest struct {
+	ID uint32 `form:"id" binding:"required,gte=1"`
+}
+
 func (svc *Service) CountTag(param *CountTagRequest) (int,error)  {
 	return svc.dao.CountTag(param.Name,param.State)
 }
@@ -52,4 +57,9 @@ func (svc *Service) UpdateTag(param *UpdateTagRequest) error {
 
 func (svc *Service) DeleteTag(param *DeleteTagRequest) error {
 	return svc.dao.DeleteTag(param.ID)
+}
+
+
+func (svc *Service) FindTag(param *FindTagRequest) (*model.Tag, error) {
+	return svc.dao.FindOne(param.ID)
 }

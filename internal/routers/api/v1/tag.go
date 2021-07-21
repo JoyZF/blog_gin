@@ -1,12 +1,15 @@
 package v1
 
 import (
+	"database/sql"
+	"fmt"
 	"github.com/JoyZF/blog_gin/global"
 	"github.com/JoyZF/blog_gin/internal/service"
 	"github.com/JoyZF/blog_gin/pkg/app"
 	"github.com/JoyZF/blog_gin/pkg/convert"
 	"github.com/JoyZF/blog_gin/pkg/errcode"
 	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 type Tag struct {
@@ -25,7 +28,27 @@ func NewTag() Tag {
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [get]
-func (t Tag) Get(c *gin.Context) {}
+func (t Tag) Get(c *gin.Context) {
+	//Q. 我们在数据库操作的时候，比如 dao 层中当遇到一个 sql.ErrNoRows 的时候，是否应该 Wrap 这个 error，抛给上层。为什么，应该怎么做请写出代码？
+	//A.我认为在dao层应该把error抛给上层,由业务逻辑决定是否需要处理sql.ErrNoRows。 代码详见 func (t Tag) Get(c *gin.Context)
+	param := service.FindTagRequest{}
+	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
+		return
+	}
+	svc := service.New(c.Request.Context())
+	tag, err := svc.FindTag(&param)
+	if errors.Is(err, sql.ErrNoRows) {
+		global.Logger.Errorf("svc.GetTagList err: %v", fmt.Errorf("v1 tag err :%+v", errors.WithStack(err)))
+		response.ToErrorResponse(errcode.ErrorGetTagListFail)
+		return
+	}
+	response.ToResponse(tag)
+	return
+}
 
 // List
 // @Summary 获取多个标签
