@@ -122,6 +122,7 @@ github.com/opentracing/opentracing-go/log
 ## explicit
 github.com/pelletier/go-toml
 # github.com/pkg/errors v0.9.1
+## explicit
 github.com/pkg/errors
 # github.com/russross/blackfriday/v2 v2.1.0
 ## explicit
@@ -193,6 +194,9 @@ golang.org/x/net/context
 golang.org/x/net/idna
 golang.org/x/net/webdav
 golang.org/x/net/webdav/internal/xml
+# golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+## explicit
+golang.org/x/sync/errgroup
 # golang.org/x/sys v0.0.0-20210525143221-35b2ab0089ea
 ## explicit
 golang.org/x/sys/cpu
